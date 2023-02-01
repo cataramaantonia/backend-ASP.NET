@@ -11,6 +11,7 @@ namespace proiect_daw.Entities
         public string Name { get; set; }
         public int Duration { get; set; }
         public int Year { get; set; }
+        public string Genre { get; set; }
         public int DirectorId { get; set; }
         public Director Director { get; set; }
         public Review Review { get; set; }

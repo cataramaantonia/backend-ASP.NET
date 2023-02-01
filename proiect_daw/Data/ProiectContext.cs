@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using proiect_daw.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace proiect_daw.Data
 {
-    public class ProiectContext : DbContext
+    public class ProiectContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>,
+                           UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>,
+                           IdentityUserToken<int>>
     {
         public ProiectContext(DbContextOptions<ProiectContext> options) : base(options) { }
         public DbSet<Movie> Movies { get; set; }
@@ -49,6 +53,13 @@ namespace proiect_daw.Data
 
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserRole>(ur =>
+            {
+                ur.HasKey(ur => new { ur.UserId, ur.RoleId });
+                ur.HasOne(ur => ur.Role).WithMany(r => r.UserRoles).HasForeignKey(ur => ur.RoleId);
+                ur.HasOne(ur => ur.User).WithMany(u => u.UserRoles).HasForeignKey(ur => ur.UserId);
+            });
         }
 
     }
