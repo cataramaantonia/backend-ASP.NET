@@ -25,6 +25,7 @@ namespace proiect_daw.Services.UserServices
             registerUser.Email = dto.Email;
             registerUser.FirstName = dto.FirstName;
             registerUser.LastName = dto.LastName;
+            registerUser.UserName = dto.Email;
 
             var result = await _userManager.CreateAsync(registerUser, dto.Password);
 

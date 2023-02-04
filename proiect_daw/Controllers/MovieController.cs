@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using proiect_daw.Entities.DTOs;
 using proiect_daw.Repositories.MovieRepository;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace proiect_daw.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        /*private readonly IMovieRepository _repository;
+        private readonly IMovieRepository _repository;
         public MovieController(IMovieRepository repository)
         {
             _repository = repository;
@@ -32,46 +33,48 @@ namespace proiect_daw.Controllers
 
             return Ok(moviesToReturn);
         }
+        /*
+                [HttpGet("{name}")]
+                public async Task<IActionResult> GetMovieById(int id)
+                {
+                    var movie = await _repository.GetById(id);
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAuthorById(int id)
+                    return Ok(new MovieDTO(movie));
+                }*/
+
+        /*  [HttpDelete("{id}")]
+          public async Task<IActionResult> DeleteMovie(int id)
+          {
+              var movie = await _repository.GetByIdAsync(id);
+
+              if (movie == null)
+              {
+                  return NotFound("Movie does not exist!");
+              }
+
+              _repository.Delete(movie);
+
+              await _repository.SaveAsync();
+
+              return NoContent();
+          }*/
+
+        /*[HttpPost]
+        public async Task<IActionResult> CreateMovie(CreateMovieDTO dto)
         {
-            var author = await _repository.GetByIdWithAddress(id);
+            Movie newMovie = new Movie();
 
-            return Ok(new AuthorDTO(author));
-        }
+            newMovie.Id = dto.Id;
+            newMovie.Name = dto.Name;
+            newMovie.Year = dto.Year;
+            newMovie.Genre = dto.Genre;
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAuthor(int id)
-        {
-            var author = await _repository.GetByIdAsync(id);
-
-            if (author == null)
-            {
-                return NotFound("Author does not exist!");
-            }
-
-            _repository.Delete(author);
+            _repository.Create(newMovie);
 
             await _repository.SaveAsync();
 
-            return NoContent();
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateAuthor(CreateAuthorDTO dto)
-        {
-            Author newAuthor = new Author();
-
-            newAuthor.Name = dto.Name;
-            newAuthor.Address = dto.Address;
-
-            _repository.Create(newAuthor);
-
-            await _repository.SaveAsync();
-
-
-            return Ok(new AuthorDTO(newAuthor));
+            return Ok(new MovieDTO(newMovie));
         }*/
 
     }

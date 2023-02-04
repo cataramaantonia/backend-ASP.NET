@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20221213185537_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\20221213191524_InitialCreate.cs" />
     <Compile Remove="Migrations\20221213191524_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20230204133456_AddingUserConfguration.cs" />
+    <Compile Remove="Migrations\20230204133456_AddingUserConfguration.Designer.cs" />
+    <Compile Remove="Migrations\20230204133702_AddingUserConfguration.cs" />
+    <Compile Remove="Migrations\20230204133702_AddingUserConfguration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\ActorRepository\" />
     <Folder Include="Repositories\BudgetRepository\" />
     <Folder Include="Repositories\ReviewRepository\" />
   </ItemGroup>

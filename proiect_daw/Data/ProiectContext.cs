@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using proiect_daw.Entities;
+using proiect_daw.EntityConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,9 @@ namespace proiect_daw.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            /*base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new UserConfiguration());*/
+
             // One to Many
 
             modelBuilder.Entity<Director>()

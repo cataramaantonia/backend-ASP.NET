@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using proiect_daw.Constants;
 using proiect_daw.Data;
+using proiect_daw.Entities;
 using proiect_daw.Repositories;
 using proiect_daw.Services.UserServices;
 using System;
@@ -38,13 +40,6 @@ namespace proiect_daw
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddScoped<IUserService, UserService>();
-            
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(UserRoleType.Admin, policy => policy.RequireRole(UserRoleType.Admin));
-                options.AddPolicy(UserRoleType.User, policy => policy.RequireRole(UserRoleType.User));
-            });
 
             services.AddAuthentication(auth =>
             {
@@ -54,7 +49,27 @@ namespace proiect_daw
             })
             .AddJwtBearer();
 
-            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            // Add Identity
+            services.AddIdentity<User, Role>(opt =>
+            {
+                //For user lockout
+                opt.Lockout.AllowedForNewUsers = true;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.Zero;
+                opt.Lockout.MaxFailedAccessAttempts = 10;
+            })
+                .AddEntityFrameworkStores<ProiectContext>()
+                .AddDefaultTokenProviders();
+
+            //services.AddTransient<IGenericRepository, GenericRepository>();
+            //services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(UserRoleType.Admin, policy => policy.RequireRole(UserRoleType.Admin));
+                options.AddPolicy(UserRoleType.User, policy => policy.RequireRole(UserRoleType.User));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

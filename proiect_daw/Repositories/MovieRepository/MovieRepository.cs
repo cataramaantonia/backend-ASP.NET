@@ -13,19 +13,9 @@ namespace proiect_daw.Repositories.MovieRepository
     {
         public MovieRepository(ProiectContext context) : base(context) { }
 
-        public async Task<Movie> GetByName(string name)
+        public async Task<Movie> GetById(int id)
         {
-            return await _context.Movies.Where(m => m.Name.Equals(name)).FirstOrDefaultAsync();
-        }
-
-        public async Task<List<Movie>> GetByYear(int year)
-        {
-            return await _context.Movies.Where(m => m.Year == year).ToListAsync();
-        }
-
-        public async Task<List<Movie>> GetByGenre(string genre)
-        {
-            return await _context.Movies.Where(m => m.Genre.Equals(genre)).ToListAsync();
+            return await _context.Movies.Where(m => m.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
         public async Task<List<Movie>> GetAllMoviesWithDirector()
