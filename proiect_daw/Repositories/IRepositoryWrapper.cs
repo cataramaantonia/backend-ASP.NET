@@ -9,7 +9,7 @@ namespace proiect_daw.Repositories
     public interface IRepositoryWrapper
     {
         IUserRepository User { get; }
-
+        ISessionTokenRepository SessionToken { get; }
         Task SaveAsync();
     }
 }

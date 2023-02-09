@@ -13,19 +13,24 @@ namespace proiect_daw.Repositories.MovieRepository
     {
         public MovieRepository(ProiectContext context) : base(context) { }
 
-        public async Task<Movie> GetById(int id)
+         public async Task<Movie> GetByName(string name)
         {
-            return await _context.Movies.Where(m => m.Id.Equals(id)).FirstOrDefaultAsync();
+            return await _context.Movies.Where(m => m.Name.Equals(name)).FirstOrDefaultAsync();
         }
-
+        
         public async Task<List<Movie>> GetAllMoviesWithDirector()
         {
             return await _context.Movies.Include(m => m.Director).ToListAsync();
         }
-        
-        public async Task<List<Movie>> GetAllMoviesWithActor()
+
+        public async Task<Movie> GetById(int id)
         {
-            return await _context.Movies.Include(m => m.MovieActors).ToListAsync();
+            return await _context.Movies.Where(m => m.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Movie>> GetAllMovies()
+        {
+            return await _context.Movies.ToListAsync();
         }
     }
 }

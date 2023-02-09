@@ -14,7 +14,7 @@ namespace proiect_daw.Entities
         public string Genre { get; set; }
         public int DirectorId { get; set; }
         public Director Director { get; set; }
-        public Review Review { get; set; }
+        public float Review { get; set; }
         public Budget Budget { get; set; }
         public ICollection<MovieActor> MovieActors { get; set; }
     }

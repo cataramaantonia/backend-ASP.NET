@@ -29,10 +29,5 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\BudgetRepository\" />
-    <Folder Include="Repositories\ReviewRepository\" />
-  </ItemGroup>
-
 
 </Project>

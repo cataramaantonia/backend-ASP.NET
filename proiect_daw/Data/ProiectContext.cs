@@ -2,11 +2,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using proiect_daw.Entities;
-using proiect_daw.EntityConfiguration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace proiect_daw.Data
 {
@@ -15,6 +10,7 @@ namespace proiect_daw.Data
                            IdentityUserToken<int>>
     {
         public ProiectContext(DbContextOptions<ProiectContext> options) : base(options) { }
+        public DbSet<SessionToken> SessionTokens { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Director> Directors { get; set; }
         public DbSet<Actor> Actors { get; set; }
@@ -22,8 +18,6 @@ namespace proiect_daw.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new UserConfiguration());*/
 
             // One to Many
 
@@ -32,10 +26,6 @@ namespace proiect_daw.Data
                 .WithOne(m => m.Director);
 
             // One to One
-
-            modelBuilder.Entity<Movie>()
-                .HasOne(m => m.Review)
-                .WithOne(r => r.Movie);
             
             modelBuilder.Entity<Movie>()
                 .HasOne(m => m.Budget)

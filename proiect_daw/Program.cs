@@ -17,13 +17,7 @@ namespace proiect_daw
     {
         public static void Main(string[] args)
         {
-            var app = CreateHostBuilder(args).Build();
-            using (var scope  = app.Services.CreateScope())
-            {
-                var roleSeeder = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
-                roleSeeder.AddRoles();
-            }
-            app.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

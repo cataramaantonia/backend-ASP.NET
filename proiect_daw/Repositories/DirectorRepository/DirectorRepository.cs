@@ -18,11 +18,15 @@ namespace proiect_daw.Repositories.DirectorRepository
             return await _context.Directors.Where(d => d.Name.Equals(name)).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Director>> GetByDebutInYear(int year)
+        public async Task<List<Director>> GetAllDirectors()
         {
-            return await _context.Directors.Where(d => d.DebutYear == year).ToListAsync();
+            return await _context.Directors.ToListAsync();
         }
 
-
+        public async Task<Director> GetById(int id)
+        {
+            return await _context.Directors.Where(d => d.Id == id).FirstOrDefaultAsync();
+        }
+       
     }
 }

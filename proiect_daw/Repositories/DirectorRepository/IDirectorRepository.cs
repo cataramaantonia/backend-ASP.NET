@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace proiect_daw.Repositories.DirectorRepository
 {
-    interface IDirectorRepository
+    public interface IDirectorRepository : IGenericRepository<Director>
     {
         Task<Director> GetByName(string name);
-        Task<List<Director>> GetByDebutInYear(int year);
+        Task<List<Director>> GetAllDirectors();
+        Task<Director> GetById(int id);
     }
 }

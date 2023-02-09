@@ -11,6 +11,8 @@ namespace proiect_daw.Repositories
     {
         private readonly ProiectContext _context;
         private IUserRepository _user;
+        private ISessionTokenRepository _sessionToken;
+
         public RepositoryWrapper(ProiectContext context)
         {
             _context = context;
@@ -24,6 +26,17 @@ namespace proiect_daw.Repositories
                 return _user;
             }
         }
+
+        public ISessionTokenRepository SessionToken
+        {
+            get
+            {
+                if (_sessionToken == null) _sessionToken = new SessionTokenRepository(_context);
+                return _sessionToken;
+            }
+        }
+
+
 
         public async Task SaveAsync()
         {

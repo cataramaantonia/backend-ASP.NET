@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace proiect_daw.Repositories.MovieRepository
 {
-     public interface IMovieRepository
+     public interface IMovieRepository : IGenericRepository<Movie>
     {
-        Task<Movie> GetById(int id);
+        Task<Movie> GetByName(string name);
         Task<List<Movie>> GetAllMoviesWithDirector();
-        Task<List<Movie>> GetAllMoviesWithActor();
+        Task<Movie> GetById(int id);
+        Task<List<Movie>> GetAllMovies();
     }
 }
